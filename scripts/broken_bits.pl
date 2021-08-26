@@ -7,7 +7,7 @@ use Socket;
 # 192.168.23.13 is in one of the subnets listed in $subnetlist
 # There are four errors in this script.  Locate and fix the errors.
 
-my $dotted_address   = q|192.168.101.255|;
+my $dotted_address   = q|192.168.23.13|;
 
 my $subnetlist       = [
                '192.168.1.0/22',
