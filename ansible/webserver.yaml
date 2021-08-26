@@ -1,16 +1,22 @@
 ---
-- hosts: all
+- hosts: webserver
   tasks:
     - name: install apache2
+      become: yes
+      become_user: root
       yum:
         name: httpd
         update_cache: yes
         state: latest
+
     - name: enable and start apache
+      become: yes
+      become_user: root
       systemd:
         name: httpd
         state: started
         enabled: yes
+
     - name: Copy index
       become: yes
       become_user: root
@@ -20,16 +26,23 @@
         mode: "0644"
         owner: root
         group: root
+
     - name: install tuned
+      become: yes
+      become_user: root
       yum:
         name: tuned
         update_cache: yes
         state: latest
-    - name: enable and start tuned
+
+    - name: Enable/Start tuned
+      become: yes
+      become_user: root
       systemd:
         name: tuned
         state: started
         enabled: yes
+
     - name: Enable tuned's throughput-performance profile
       become: yes
       become_user: root
