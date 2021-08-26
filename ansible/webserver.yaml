@@ -1,0 +1,36 @@
+---
+- hosts: all
+  tasks:
+    - name: install apache2
+      yum:
+        name: httpd
+        update_cache: yes
+        state: latest
+    - name: enable and start apache
+      systemd:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: Copy index
+      become: yes
+      become_user: root
+      copy:
+        src: "{{playbook_dir}}/../www/index.html"
+        dest: "/var/www/html/"
+        mode: "0644"
+        owner: root
+        group: root
+    - name: install tuned
+      yum:
+        name: tuned
+        update_cache: yes
+        state: latest
+    - name: enable and start tuned
+      systemd:
+        name: tuned
+        state: started
+        enabled: yes
+    - name: Enable tuned's throughput-performance profile
+      become: yes
+      become_user: root
+      command: tuned-adm profile throughput-performance
