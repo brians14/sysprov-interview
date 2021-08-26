@@ -71,6 +71,17 @@ resource "azurerm_network_security_group" "amdsysprov" {
         destination_address_prefix = "*"
     }
 
+    security_rule {
+        name                       = "HTTP"
+        priority                   = 1002
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "*"
+        source_port_range          = "*"
+        destination_port_range     = "80"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+    }
     tags = {
         environment = "AMD SYSPROV"
     }
@@ -121,17 +132,6 @@ resource "azurerm_storage_account" "amdsysprov" {
         environment = "AMD SYSPROV"
     }
 }
-
-# # Create (and display) an SSH key
-# resource "tls_private_key" "apache_ssh" {
-#   algorithm = "RSA"
-#   rsa_bits = 4096
-# }
-
-# output "tls_private_key" {
-#     value = tls_private_key.apache_ssh.private_key_pem
-#     sensitive = true
-# }
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "amdsysprov" {
