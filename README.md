@@ -58,18 +58,26 @@ Small exercise to assess interview candidates approach to development with IaC, 
     # Load the new variables by executing the .bashrc script
     source ~/.bashrc
     
-    # Initialize terraform project
-    terraform init
-    
-    # Create a changes plan
-    terraform plan -out main.tfplan
-    
-    # Apply changes
-    terraform apply main.tfplan
-    
-    # Destroy plan to destroy infrastructure
-    terraform plan -destroy -out main.destroy.tfplan
-    
-    # Destroy infrastructure
-    terraform apply main.destroy.tfplan
     ```
+    
+ * Ansible
+   ```bash
+   # Update respository db
+   $ sudo dnf check-update
+   
+   # Install Ansible
+   $ sudo dnf install ansible -y
+   ```
+
+* Setup VM and configure everything update
+
+```bash
+    bash ./create.sh
+```
+
+
+* Destroy VM and restore ansible hosts file
+
+``` bash
+    bash ./destroy.sh
+```
